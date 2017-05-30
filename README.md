@@ -56,7 +56,7 @@ Required arguments
  -s|--sex      the name of sex chromosome
 ````
 * Argument details</br>
- `-dup` The duplicated window record files for human, livestock and main crops with 800 bp window size can be download from (http://animal.nwsuaf.edu.cn/software). If you work with other organisms, you will want to create duplicated window record file in order to use absolute copy number correction function of CNVcaller. Follow the [instruction](https://github.com/JiangYuLab/CNVcaller/new/master?readme=1#generate-your-own-duplicated-window-record-file).</br>
+ `-dup` The duplicated window record files for human, livestock and main crops with 800 bp window size can be download from (http://animal.nwsuaf.edu.cn/software). If you work with other organisms, you will want to create duplicated window record file in order to use absolute copy number correction function of CNVcaller. Follow the [instruction](https://github.com/JiangYuLab/CNVcaller/tree/master#generate-your-own-duplicated-window-record-file).</br>
  `-s` The gender of this individual will be determines by the ratio of RD of the given sex chromosome and the RD of the other autosomes. The name of X or Z chromosome should be given for the XY or ZW genomes.</br>
 
 * Example, to convert ERR340328.bam to normalized copy number using 1000bp window size.</br>
