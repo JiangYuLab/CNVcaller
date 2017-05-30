@@ -16,7 +16,7 @@ The following software must be installed on your machine:
 
 ### Installation
 Clone the `CNVcaller` git:</br>
-    `git clone`</br>
+    `git clone https://github.com/JiangYuLab/CNVcaller.git`</br>
 Go to `CNVcaller` directory</br>
     `cd CNVcaller`
 
