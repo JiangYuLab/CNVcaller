@@ -139,7 +139,7 @@ Step 3: Generate duplicated window record file.
  perl 0.2.Kmer_Link.pl <PSL> <window_size> <output>
 
  Required arguments
- <PSL> blat results from step02 (PSL format)
+ <PSL> blat results (PSL format)
  <window_size> The size of the window to use for CNV calling
  <output> Output genome duplicated window record file
 ````
