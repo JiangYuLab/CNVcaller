@@ -128,7 +128,7 @@ Step 1: Split genome into short kmer sequences.
  <window_size> The size of the window to use for CNV calling
  <output> Output kmer file in FASTA format
 ````
- `Example: perl 0.0.Kmer_Generate.pl reference.fa 800 kmer.fa`
+ `Example: perl 0.1.Kmer_Generate.pl reference.fa 800 kmer.fa`
 
 Step 2: Align the kmer FASTA (from step 1) to reference genome using blat.
 
@@ -143,7 +143,7 @@ Step 3: Generate duplicated window record file.
  <window_size> The size of the window to use for CNV calling
  <output> Output genome duplicated window record file
 ````
- `Example: perl 0.1.Kmer_Link.pl kmer.psl 800 window.link.fa`
+ `Example: perl 0.2.Kmer_Link.pl kmer.psl 800 window.link.fa`
  
 ## Contact 
 Any questions, bug reports and suggestions can be posted to Email:</br>
