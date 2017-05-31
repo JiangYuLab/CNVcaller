@@ -39,7 +39,7 @@ Optional arguments
  -g the upper limit of gap content [default=0.5]
 ````
 * Argument details</br>
- `-w` We recommend 400-1000bp window size for >10X coverage sequencing data, 1000-2000 window size for >10 X coverage sequencing data. Increasing the window size will reduce the noise at the cost of sensitivity.
+ `-w` We recommend 400-1000bp window size for >10X coverage sequencing data, 1000-2000 window size for <10 X coverage sequencing data. Increasing the window size will reduce the noise at the cost of sensitivity.
  
  ### 2. Individual RD processing 
 Count the reads of each window across genome from BAM file and generate a comparable read depth (RD) file of each individual.</br>
