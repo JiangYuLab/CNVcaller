@@ -45,7 +45,7 @@ while (<IN>) {
 	my $kmer = shift @tmp;
 	my $sd = pop @tmp;
 	my $average = pop @tmp;
-	die "unexpected sample number!\n" unless length(@tmp_start_array) == length(@tmp);
+	die "unexpected sample number!\n" unless scalar(@tmp_start_array) == scalar(@tmp);
 	my $tmp_cor = &pearson(\@tmp,\@tmp_start_array);
 #	print STDERR "$tmp_cor\n";
 	if ($tmp_chr eq $chr && (($start-$tmp_end+1) <= ($tmp_length + $length)*$percent or $start-$tmp_end+1 <= 300) && $tmp_cor >= $correlation){
