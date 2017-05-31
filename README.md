@@ -21,7 +21,7 @@ Go to `CNVcaller` directory</br>
     `cd CNVcaller`
 
 ## Test with example:
-To grab sample data and test `CNVcaller`, please download it from our [CNVcaller website](http://animal.nwsuaf.edu.cn/software)
+To grab sample data and test `CNVcaller`, please download it from our [CNVcaller website](ftp://jiang:jiang@animal.nwsuaf.edu.cn/CNVcaller/demo/)
 
 ## Running the program
 CNVcaller contains four steps consisting one perl script and three bash scripts. You need to set `CNVcaller` variables in the three bash scripts based on your environment.
@@ -42,7 +42,7 @@ Optional arguments
  `-w` We recommend 400-1000bp window size for >10X coverage sequencing data, 1000-2000 window size for <10 X coverage sequencing data. Increasing the window size will reduce the noise at the cost of sensitivity.
  
  ### 2. Individual RD processing 
-Count the reads of each window across genome from BAM file and generate a comparable read depth (RD) file of each individual.</br>
+Count the reads of each window across genome from BAM file and generate a comparable read depth (RD) file of each individual. `referenceDB.windowsize` must be placed in current directory.</br>
 
 Three default directories `RD_raw`  `RD_absolute`  `RD_normalized` will be created in current directory in order, containing the raw read depth, read depth after absolute copy number correction and the final GC corrected normalized read depth of each sample. The name of the normalized RD file indicates the average RD (mean), STDEV of the RD and the gender (1=XX/ZZ, 2=XY/ZW) of this sample. The final read depths are normalized to one.</br>
 
@@ -56,7 +56,7 @@ Required arguments
  -s|--sex      the name of sex chromosome
 ````
 * Argument details</br>
- `-dup` The duplicated window record files for human, livestock and main crops with 800 bp window size can be download from (http://animal.nwsuaf.edu.cn/software). If you work with other organisms, you will want to create duplicated window record file in order to use absolute copy number correction function of CNVcaller. Follow the [instruction](https://github.com/JiangYuLab/CNVcaller/tree/master#generate-your-own-duplicated-window-record-file).</br>
+ `-dup` The duplicated window record files for human, livestock and main crops with 800 bp window size can be download from (ftp://jiang:jiang@animal.nwsuaf.edu.cn/CNVcaller/database/). If you work with other organisms, you will want to create duplicated window record file in order to use absolute copy number correction function of CNVcaller. Follow the [instruction](https://github.com/JiangYuLab/CNVcaller/tree/master#generate-your-own-duplicated-window-record-file).</br>
  `-s` The gender of this individual will be determines by the ratio of RD of the given sex chromosome and the RD of the other autosomes. The name of X or Z chromosome should be given for the XY or ZW genomes.</br>
 
 * Example, to convert ERR340328.bam to normalized copy number using 1000bp window size.</br>
