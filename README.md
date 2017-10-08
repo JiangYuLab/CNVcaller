@@ -105,16 +105,17 @@ Required arguments:
   `bash CNV.Discovery.sh -l list -e exclude_list -f 0.1 -h 3 -r 0.5 -p primaryCNVR -m mergeCNVR`
 
 ### 4. Genotyping
-Clustering the input samples into no more than three genotypes uses constrained and unsupervised Gaussian mixture modes. The output is a genotype VCF - a VCF format file containing the input site descriptions, additional site-specific information and a called genotype for each input sample.
+Clustering the input samples into genotypes uses Gaussian mixture modes. The output contain a genotype VCF - a VCF format file containing the input site descriptions, additional site-specific information and a called genotype for each input sample.
 ````
-$ bash Genotype.sh -i <input> -n <sampleNumber> -o <output>
+$ python Genotype.py --cnvfile <input> --outprefix <outfile prefix>
 Required arguments:
--i|--input          merged CNVR file
--n|--sampleNumber   number of samples
--o|--output         vcf output
+--cnvfile          merged CNVR file
+--outprefix        prefix of out files
+Optional arguments:
+--nproc            number of process will be used, default is one.
 ````
 * Example</br>
- `bash Genotype.sh -i mergeCNVR -n 10 -o Genotype.vcf`
+ `python Genotype.py --cnvfile mergeCNVR --outprefix Genotype`
 
 ## Generate your own duplicated window record file
 It is highly recommended to generate the corresponding file for each chromosome separately and then concatenate the output files in the correct order.
