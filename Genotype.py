@@ -5,6 +5,7 @@ Clustering the input samples into genotypes uses Gaussian mixture modes.
 
 import time
 from itertools import chain
+from collections import Counter
 import click
 import numpy as np
 import pandas as pd
@@ -25,8 +26,10 @@ def loadcnvrfile(cnvfile):
     df = pd.read_csv(cnvfile, sep='\t', low_memory=False)
     info_df = df.iloc[:, :8]
     cnv_df = df.iloc[:, 8:-2]
-    sample_header = cnv_df.columns
-    return info_df, cnv_df.values, list(sample_header)
+    samples = cnv_df.columns
+    avg_ay = df['average'].values
+    sd_ay = df['sd'].values
+    return info_df, cnv_df.values, list(samples), avg_ay, sd_ay
 
 
 def genotype(cnvays):
@@ -57,7 +60,16 @@ def genotype(cnvays):
     return result
 
 
-def produce_vcf(df, cnvays, outname):
+def stat_gt(ay):
+    gts = ['dd', 'Ad', 'AA', 'AB', 'BB', 'BC', 'M']
+    c = Counter(ay)
+    counts = []
+    for gt in gts:
+        counts.append(c.get(gt, 0))
+    return counts
+
+
+def produce_vcf(df, cnvays, samples, outname):
     gt2alt = {'d': 'CN0',
               'A': 'CN1',
               'B': 'CN2',
@@ -77,7 +89,6 @@ def produce_vcf(df, cnvays, outname):
 ##INFO=<ID=CALINSKIHARABAZESCORE>,Number=1,Type=Float,Description="calinski harabaz score of genotype on this cnvr"
 ##INFO=<ID=LOGLIKELIHOOD,Number=1,Type=Float,Description="log likelihood of genotype on this cnvr">
 #CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT''')
-        samples = df.columns[8: -3]
         for sm in samples:
             f.write(f'\t{sm}')
         f.write('\n')
@@ -87,7 +98,7 @@ def produce_vcf(df, cnvays, outname):
             chrom = row[0]
             start = row[1]
             end = row[2]
-            gts = row[8: -3]
+            gts = row[8: 8+len(samples)]
             allels = list(chain.from_iterable([x if x!= 'M' else 'MM' for x in gts]))
             allels = [gt2alt[x] for x in allels]
             alt = sorted(list(set(allels)))
@@ -111,7 +122,7 @@ def produce_vcf(df, cnvays, outname):
             log_likelihood = row[-1]
             f.write(f'{chrom}\t{start}\t{f"{chrom}:{start}-{end}"}\tA\t{alt}\t.\t.\tEND={end};SVTYPE={svtype};SILHOUETTESCORE={silhouette_score};CALINSKIHARABAZESCORE={calinski_harabaz_score};LOGLIKELIHOOD={log_likelihood}\tGT:CP\t{fgts}\n')
 
-def produce_mergevcf(df, cnvays, outname):
+def produce_mergevcf(df, cnvays, samples, outname):
     gt2alt = {'d': 'CN0',
               'A': 'CN1',
               'B': 'CN2',
@@ -131,7 +142,6 @@ def produce_mergevcf(df, cnvays, outname):
 ##INFO=<ID=CALINSKIHARABAZESCORE>,Number=1,Type=Float,Description="calinski harabaz score of genotype on this cnvr"
 ##INFO=<ID=LOGLIKELIHOOD,Number=1,Type=Float,Description="log likelihood of genotype on this cnvr">
 #CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT''')
-        samples = df.columns[8: -3]
         for sm in samples:
             f.write(f'\t{sm}')
         f.write('\n')
@@ -141,7 +151,7 @@ def produce_mergevcf(df, cnvays, outname):
             chrom = row[0]
             start = row[1]
             end = row[2]
-            gts = row[8: -3]
+            gts = row[8: 8+len(samples)]
             allels = list(chain.from_iterable([x if x!= 'M' else 'MM' for x in gts]))
             allels = [gt2alt[x] for x in allels]
             alt = sorted(list(set(allels)))
@@ -175,8 +185,8 @@ def main(cnvfile, outprefix, merge, nproc):
     Clustering the input samples into genotypes uses Gaussian mixture modes.
     """
     start = time.time()
-    info_df, cnvays, sample_header = loadcnvrfile(cnvfile)
-    sample_header += ['silhouette_score', 'calinski_harabaz_score', 'Log_likelihood']
+    info_df, cnvays, samples, avg_ay, sd_ay = loadcnvrfile(cnvfile)
+    sample_header = samples + ['silhouette_score', 'calinski_harabaz_score', 'Log_likelihood']
     if nproc > 1:
         pool = Pool(processes=nproc)
         gtdf = pd.DataFrame(np.vstack(pool.map(genotype, np.array_split(cnvays, nproc))))
@@ -184,10 +194,15 @@ def main(cnvfile, outprefix, merge, nproc):
         gtdf = pd.DataFrame(genotype(cnvays))
     gtdf.columns = sample_header
     df = pd.concat([info_df, gtdf], axis=1, join='inner')
+    df['average'] = avg_ay
+    df['sd'] = sd_ay
+    df = pd.concat([df,
+                    pd.DataFrame(df[samples].apply(stat_gt, axis=1).values.tolist(), columns=['dd', 'Ad', 'AA', 'AB', 'BB', 'BC', 'M'])],
+                   axis=1)
     df.to_csv(f"{outprefix}.tsv", sep='\t', index=False, na_rep='NA')
-    produce_vcf(df, cnvays, f"{outprefix}.vcf")
+    produce_vcf(df, cnvays, samples, f"{outprefix}.vcf")
     if merge:
-        produce_mergevcf(df, cnvays, f"{outprefix}_merge.vcf")
+        produce_mergevcf(df, cnvays, samples, f"{outprefix}_merge.vcf")
     end = time.time()
     print('rum time %s' % (end-start))
 
