@@ -10,9 +10,8 @@
 The following software must be installed on your machine:
 * Perl5+ : tested with version 5.10.1
 * samtools : tested with version 1.3 (using htslib 1.3)
-* R : tested with version 3.2.3
-* mclust (R package): tested with version 5.2.3
-* blat : tested with version v36x1 (Optinal, in order to generate your own duplicated window record file)
+* Python : tested with version 3.6
+* blasr : tested with version 5.2 (Optinal, in order to generate your own duplicated window record file)
 
 ### Installation
 Clone the `CNVcaller` git:</br>
@@ -24,7 +23,7 @@ Go to `CNVcaller` directory</br>
 To grab sample data and test `CNVcaller`, please download it from ftp://jiang:jiang@animal.nwsuaf.edu.cn/CNVcaller/demo/
 
 ## Running the program
-CNVcaller contains four steps consisting one perl script and three bash scripts. You need to set `CNVcaller` variables in the three bash scripts based on your environment.
+CNVcaller contains four steps consisting one perl script, two bash scripts and one python script. You need to set `CNVcaller` variables in the three bash scripts based on your environment.
 
 ### 1. Indexing Reference Genome
 The reference genome is segmented into overlapping sliding windows. The windows are indexed to form a reference database used in all samples. This commend will create the file `referenceDB.windowsize` in current directory by default.
@@ -122,29 +121,29 @@ It is highly recommended to generate the corresponding file for each chromosome 
 
 Step 1: Split genome into short kmer sequences.
 ````
- perl 0.1.Kmer_Generate.pl <ref> <window_size> <output>
+$ python 0.1.Kmer_Generate.py [OPTIONS] FAFILE WINSIZE OUTFILE
 
  Required arguments
- <ref> Reference sequence in FASTA format
- <window_size> The size of the window to use for CNV calling
- <output> Output kmer file in FASTA format
+ <FAFILE> Reference sequence in FASTA format
+ <WINSIZE> The size of the window to use for CNV calling
+ <OUTFILE> Output kmer file in FASTA format
 ````
- `Example: perl 0.1.Kmer_Generate.pl reference.fa 800 kmer.fa`
+ `Example: python 0.1.Kmer_Generate.py reference.fa 800 kmer.fa`
 
-Step 2: Align the kmer FASTA (from step 1) to reference genome using blat.
+Step 2: Align the kmer FASTA (from step 1) to reference genome using blasr.
 
- `Example: blat -fastMap -minIdentity=97 reference.fa kmer.fa kmer.psl`
+`Example: blasr kmer.fa reference.fa --sa reference.fa.sa --out kmer.aln -m 5 --noSplitSubreads --minMatch 15 --maxMatch 20 --advanceHalf --advanceExactMatches 10 --fastMaxInterval --fastSDP --aggressiveIntervalCut --bestn 10`
 
 Step 3: Generate duplicated window record file.
 ````
- perl 0.2.Kmer_Link.pl <PSL> <window_size> <output>
+$ python 0.2.Kmer_Link.py [OPTIONS] BLASR WINSIZE OUTFILE
 
  Required arguments
- <PSL> blat results (PSL format)
- <window_size> The size of the window to use for CNV calling
- <output> Output genome duplicated window record file
+ <BLASR> blasr results (-m 5 format)
+ <WINSIZE> The size of the window to use for CNV calling
+ <OUTFILE> Output genome duplicated window record file
 ````
- `Example: perl 0.2.Kmer_Link.pl kmer.psl 800 window.link.fa`
+ `Example: python 0.2.Kmer_Link.py kmer.aln 800 window.link`
  
 ## Contact 
 Any questions, bug reports and suggestions can be posted to Email:</br>
