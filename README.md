@@ -20,7 +20,7 @@ Go to `CNVcaller` directory</br>
     `cd CNVcaller`
 
 ## Test with example:
-To grab sample data and test `CNVcaller`, please download it from [demo](http://animal.nwsuaf.edu.cn/code/source/download/CNVcaller/demo.tar.gz)
+To grab sample data and test `CNVcaller`, please download it from [demo](http://animal.nwsuaf.edu.cn/code/source/download/CNVcaller/demo.tar.gz).
 
 ## Running the program
 CNVcaller contains four steps consisting one perl script, two bash scripts and one python script. You need to set `CNVcaller` variables in the three bash scripts based on your environment.
@@ -55,7 +55,7 @@ Required arguments
  -s|--sex      the name of sex chromosome
 ````
 * Argument details</br>
- `-dup` The duplicated window record files for human, livestock and main crops with 800 bp window size can be download from ftp://jiang:jiang@animal.nwsuaf.edu.cn/CNVcaller/database/ . If you work with other organisms, you will want to create duplicated window record file in order to use absolute copy number correction function of CNVcaller. Follow the [instruction](https://github.com/JiangYuLab/CNVcaller/tree/master#generate-your-own-duplicated-window-record-file).</br>
+ `-dup` The duplicated window record files. We provide duplicated window record files for different species, such as human, goat, sheep, pig, cattle, chicken, maize, wheat, and [soybean]http://animal.nwsuaf.edu.cn/code/source/download/CNVcaller/database/duplicated_window_record_file/soybean.tar.gz. If you work with other organisms, you will want to create duplicated window record file in order to use absolute copy number correction function of CNVcaller. Follow the [instruction](https://github.com/JiangYuLab/CNVcaller/tree/master#generate-your-own-duplicated-window-record-file).</br>
  `-s` The gender of this individual will be determines by the ratio of RD of the given sex chromosome and the RD of the other autosomes. The name of X or Z chromosome should be given for the XY or ZW genomes.</br>
 
 * Example, to convert ERR340328.bam to normalized copy number using 1000bp window size.</br>
