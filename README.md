@@ -20,7 +20,7 @@ Go to `CNVcaller` directory</br>
     `cd CNVcaller`
 
 ## Test with example:
-To grab sample data and test `CNVcaller`, please download it from ftp://jiang:jiang@animal.nwsuaf.edu.cn/CNVcaller/demo/
+To grab sample data and test `CNVcaller`, please download it from [demo] (http://animal.nwsuaf.edu.cn/code/source/download/CNVcaller/demo.tar.gz)
 
 ## Running the program
 CNVcaller contains four steps consisting one perl script, two bash scripts and one python script. You need to set `CNVcaller` variables in the three bash scripts based on your environment.
