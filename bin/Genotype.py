@@ -35,7 +35,7 @@ def loadcnvrfile(cnvfile):
 
 def genotype(cnvays):
     result = []
-    n_com = 10 if cnvays.shape[1] >= 10 else cnvays.shape[1]
+    n_com = 10 if cnvays.shape[1] > 10 else cnvays.shape[1] - 1
     n_init = 3
     for cnvay in cnvays:
         cnv = [[x] for x in cnvay]
