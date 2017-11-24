@@ -32,10 +32,10 @@ die $usage if ( @ARGV < 1 || defined($opts{"help"}));
 #--------------------Main-----Function-----Start-----------------#
 #****************************************************************#
 
-$opts{w} = (defined $opts{k1}) ? $opts{k1} : 800;
-$opts{s} = (defined $opts{k2}) ? $opts{k2} : \@sex;
-$opts{p} = (defined $opts{k3}) ? $opts{k3} : 0.05;
-$opts{l} = (defined $opts{k4}) ? $opts{k4} : 0.05;
+$opts{w} = (defined $opts{w}) ? $opts{w} : 800;
+$opts{s} = (defined $opts{s}) ? $opts{s} : \@sex;
+$opts{p} = (defined $opts{p}) ? $opts{p} : 0.05;
+$opts{l} = (defined $opts{l}) ? $opts{l} : 0.05;
 ##############################################################################################################################
 my $repeat_max=$opts{w}*0.3;
 my %GC_region_average;
@@ -135,7 +135,7 @@ while (<RAW>){
 	chomp;
 	my @read_inf = split/\t/;
 	$region_average_sd{$read_inf[3]} = 0 if not exists $region_average_sd{$read_inf[3]};
-	if (grep (/^$read_inf[0]$/ ,@{$opts{k2}})) {
+	if (grep (/^$read_inf[0]$/ ,@{$opts{s}})) {
 		$read_inf[2]=sprintf "%.2f",($sex_correct_fold*$read_inf[2]*$region_average_sd{$read_inf[3]});
 	}
 	else{
