@@ -85,8 +85,8 @@ def produce_vcf(df, cnvays, samples, outname):
 ##FORMAT=<ID=CP,Number=1,Type=Float,Description="Normalized copy number">
 ##INFO=<ID=END,Number=1,Type=Integer,Description="End coordinate of this variant">
 ##INFO=<ID=SVTYPE,Number=1,Type=String,Description="Type of structural variant">
-##INFO=<ID=SILHOUETTESCORE,Number=1,Type=Float,Description="silhouette score of genotype on this cnvr">"
-##INFO=<ID=CALINSKIHARABAZESCORE>,Number=1,Type=Float,Description="calinski harabaz score of genotype on this cnvr"
+##INFO=<ID=SILHOUETTESCORE,Number=1,Type=Float,Description="silhouette score of genotype on this cnvr">
+##INFO=<ID=CALINSKIHARABAZESCORE,Number=1,Type=Float,Description="calinski harabaz score of genotype on this cnvr">
 ##INFO=<ID=LOGLIKELIHOOD,Number=1,Type=Float,Description="log likelihood of genotype on this cnvr">
 #CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT''')
         for sm in samples:
@@ -138,8 +138,8 @@ def produce_mergevcf(df, cnvays, samples, outname):
 ##FORMAT=<ID=CP,Number=1,Type=Float,Description="Normalized copy number">
 ##INFO=<ID=END,Number=1,Type=Integer,Description="End coordinate of this variant">
 ##INFO=<ID=SVTYPE,Number=1,Type=String,Description="Type of structural variant">
-##INFO=<ID=SILHOUETTESCORE,Number=1,Type=Float,Description="silhouette score of genotype on this cnvr">"
-##INFO=<ID=CALINSKIHARABAZESCORE>,Number=1,Type=Float,Description="calinski harabaz score of genotype on this cnvr"
+##INFO=<ID=SILHOUETTESCORE,Number=1,Type=Float,Description="silhouette score of genotype on this cnvr">
+##INFO=<ID=CALINSKIHARABAZESCORE,Number=1,Type=Float,Description="calinski harabaz score of genotype on this cnvr">
 ##INFO=<ID=LOGLIKELIHOOD,Number=1,Type=Float,Description="log likelihood of genotype on this cnvr">
 #CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT''')
         for sm in samples:
