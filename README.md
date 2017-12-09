@@ -148,3 +148,9 @@ $ python 0.2.Kmer_Link.py [OPTIONS] BLASR WINSIZE OUTFILE
 ## Contact 
 Any questions, bug reports and suggestions can be posted to Email:</br>
 yu.jiang@nwafu.edu.cn
+
+## CNVcaller has a paper
+https://academic.oup.com/gigascience/advance-article/doi/10.1093/gigascience/gix115/4689116
+
+## Citation
+Xihong Wang, Zhuqing Zheng, Yudong Cai, Ting Chen, Chao Li, Weiwei Fu, Yu Jiang; CNVcaller: Highly Efficient and Widely Applicable Software for Detecting Copy Number Variations in Large Populations, GigaScience, , gix115, https://doi.org/10.1093/gigascience/gix115
