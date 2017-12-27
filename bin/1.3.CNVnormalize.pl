@@ -119,6 +119,8 @@ foreach my $tmp_gc (sort {$a <=> $b} keys %GC_region_average){
 	}
 	$region_average_sd{$tmp_gc} = $sum_window > 0 ? sprintf "%.2f", ($sum/$sum_window) : 0 ;
 	print STDERR "$tmp_gc\t$region_average_sd{$tmp_gc}\t$sum_window\t$#sorted_tmp\n";######################################GC group output test
+	$sum = 0;
+	$sum_window = 0;
 }
 %GC_region_average=();
 
