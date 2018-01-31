@@ -2,7 +2,7 @@
 `CNVcaller` is designed to detect copy number variation using sequencing data from populations.
 
 ## Overview
-`CNVcaller` is a program for detecting the integrated copy number veriation regions (CNVRs) using population sequencing data. The high-confidence CNVRs are discovered and refined by both individual and population criteria. The result is a VCF format genotype file which can be used in GWAS/QLT research. Bases on our validation, CNVcaller can report CNVRs from large populations with more than 1000 individuals within one week on one computational node. It can be applied to complicated genomes such as wheat and pan-genome.
+`CNVcaller` is a program for detecting the integrated copy number veriation regions (CNVRs) using population sequencing data. The high-confidence CNVRs are discovered and refined by both individual and population criteria. The result is a VCF format genotype file which can be used in GWAS/QLT research. Based on our validation, CNVcaller can report CNVRs from large populations with more than 1000 individuals within one week on one computational node. It can be applied to complicated genomes such as wheat and pan-genome.
 
 ## Installation and requirements
 
