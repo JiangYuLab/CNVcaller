@@ -62,7 +62,7 @@ Required arguments
   `bash Individual.Process.sh -b ERR340328.bam -h ERR340328 -d dupfile -s X `
 
 ### 3. CNVR detection
-The normolized RD files of all samples are piled up into a two-dimensional population RD file. The integrated CNVR are detected by scanning the population RD file with aberrantly RD, CNV allele frequency and significantly correlation with adjacent windows. The adjacent candidate windows showing high correlation will be further merged.
+The normalized RD files of all samples are piled up into a two-dimensional population RD file. The integrated CNVR are detected by scanning the population RD file with aberrantly RD, CNV allele frequency and significantly correlation with adjacent windows. The adjacent candidate windows showing high correlation will be further merged.
 ````
 $ bash CNV.Discovery.sh -l <RDFileList> -e <excludedFileList> -f <frequency> -h <homozygous> -r <pearsonCorrelation> -p <primaryCNVR> -m <mergedCNVR>
 Required arguments: 
