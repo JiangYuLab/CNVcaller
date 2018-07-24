@@ -48,7 +48,7 @@ open (IN, "-|", "samtools view -F 0x504 $ARGV[1]") or die "$!\n";
 while (<IN>){
 	chomp;
 	my @read_inf = split/\t/;
-	$read_inf[3] += (length($read_inf[8])/2);
+	$read_inf[3] += (length($read_inf[9])/2);
 	my $start = int($read_inf[3]/$opts{w})*$opts{w}+1;
 	my $end = int($read_inf[3]/$opts{w}+0.5)*$opts{w}-$step_size+1;
 	if ($_ =~ /\sXA:Z/){
