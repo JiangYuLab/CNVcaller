@@ -13,7 +13,7 @@ from multiprocessing import Pool
 from sklearn.mixture import BayesianGaussianMixture
 from sklearn.mixture import GaussianMixture
 from sklearn.metrics import silhouette_score
-from sklearn.metrics import calinski_harabaz_score
+from sklearn.metrics import calinski_harabasz_score
 
 
 
