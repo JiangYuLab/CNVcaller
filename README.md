@@ -62,7 +62,7 @@ Required arguments
  -s|--sex      the name of sex chromosome
 ````
 * Argument details</br>
- `-dup` The duplicated window record files. We provide duplicated window record files for different species, such as [human](http://animal.nwsuaf.edu.cn/code/source/download/CNVcaller/database/duplicated_window_record_file/human.tar.gz), [goat](http://animal.nwsuaf.edu.cn/code/source/download/CNVcaller/database/duplicated_window_record_file/goat.tar.gz), [sheep](http://animal.nwsuaf.edu.cn/code/source/download/CNVcaller/database/duplicated_window_record_file/sheep.tar.gz), [pig](http://animal.nwsuaf.edu.cn/code/source/download/CNVcaller/database/duplicated_window_record_file/pig.tar.gz), [cattle](http://animal.nwsuaf.edu.cn/code/source/download/CNVcaller/database/duplicated_window_record_file/cattle.tar.gz), [chicken](http://animal.nwsuaf.edu.cn/code/source/download/CNVcaller/database/duplicated_window_record_file/chicken.tar.gz), [maize](http://animal.nwsuaf.edu.cn/code/source/download/CNVcaller/database/duplicated_window_record_file/maize.tar.gz), [wheat](http://animal.nwsuaf.edu.cn/code/source/download/CNVcaller/database/duplicated_window_record_file/wheat.tar.gz), and [soybean](http://animal.nwsuaf.edu.cn/code/source/download/CNVcaller/database/duplicated_window_record_file/soybean.tar.gz). If you work with other organisms, you will want to create duplicated window record file in order to use absolute copy number correction function of CNVcaller. Follow the [instruction](https://github.com/JiangYuLab/CNVcaller/tree/master#generate-your-own-duplicated-window-record-file).</br>
+ `-dup` The duplicated window record files. We provide duplicated window record files for different species, such as [human](http://animal.omics.pro/code/source/download/CNVcaller/database/duplicated_window_record_file/human.tar.gz), [goat](http://animal.omics.pro/code/source/download/CNVcaller/database/duplicated_window_record_file/goat.tar.gz), [sheep](http://animal.omics.pro/code/source/download/CNVcaller/database/duplicated_window_record_file/sheep.tar.gz), [pig](http://animal.omics.pro/code/source/download/CNVcaller/database/duplicated_window_record_file/pig.tar.gz), [cattle](http://animal.omics.pro/code/source/download/CNVcaller/database/duplicated_window_record_file/cattle.tar.gz), [chicken](http://animal.omics.pro/code/source/download/CNVcaller/database/duplicated_window_record_file/chicken.tar.gz), [maize](http://animal.omics.pro/code/source/download/CNVcaller/database/duplicated_window_record_file/maize.tar.gz), [wheat](http://animal.omics.pro/code/source/download/CNVcaller/database/duplicated_window_record_file/wheat.tar.gz), and [soybean](http://animal.omics.pro/code/source/download/CNVcaller/database/duplicated_window_record_file/soybean.tar.gz). If you work with other organisms, you will want to create duplicated window record file in order to use absolute copy number correction function of CNVcaller. Follow the [instruction](https://github.com/JiangYuLab/CNVcaller/tree/master#generate-your-own-duplicated-window-record-file).</br>
  `-s` The gender of this individual will be determines by the ratio of RD of the given sex chromosome and the RD of the other autosomes. The name of X or Z chromosome should be given for the XY or ZW genomes.</br>
 
 * Example, to convert ERR340328.bam to normalized copy number using 1000bp window size.</br>
@@ -139,7 +139,10 @@ $ python 0.1.Kmer_Generate.py [OPTIONS] FAFILE WINSIZE OUTFILE
 
 Step 2: Align the kmer FASTA (from step 1) to reference genome using blasr sawriter and in the conda `blasr` environment.
 
-`Create the reference.fa.sa file: sawriter reference.fasta.sa reference.fasta`
+Create the reference.fa.sa file: 
+`Example: sawriter reference.fasta.sa reference.fasta`
+
+Align the kmer FASTA to reference genome: 
 `Example: blasr kmer.fa reference.fa --sa reference.fa.sa --out kmer.aln -m 5 --noSplitSubreads --minMatch 15 --maxMatch 20 --advanceHalf --advanceExactMatches 10 --fastMaxInterval --fastSDP --aggressiveIntervalCut --bestn 10`
 
 Step 3: Generate duplicated window record file.
