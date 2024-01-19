@@ -11,13 +11,20 @@ The following software must be installed on your machine:
 * Perl5+ : tested with version 5.10.1
 * samtools : tested with version 1.3 (using htslib 1.3)
 * Python : tested with version 3.6
-* blasr : tested with version 5.2 (Optinal, in order to generate your own duplicated window record file)
+* blasr : tested with version 5.2+ (Optinal, in order to generate your own duplicated window record file)
 
 ### Installation
 Clone the `CNVcaller` git:</br>
     `git clone https://github.com/JiangYuLab/CNVcaller.git`</br>
 Go to `CNVcaller` directory</br>
     `cd CNVcaller`
+
+### Install blasr
+Since blasr has stopped updating, it is highly recommended to create a separate conda virtual environment for installation:
+````
+conda create -n blasr blasr=5.3.2
+conda activate blasr
+````
 
 ## Test with example:
 To grab sample data and test `CNVcaller`, please download it from [here](http://animal.nwsuaf.edu.cn/code/source/download/CNVcaller/demo.tar.gz).
@@ -130,8 +137,9 @@ $ python 0.1.Kmer_Generate.py [OPTIONS] FAFILE WINSIZE OUTFILE
 ````
  `Example: python 0.1.Kmer_Generate.py reference.fa 800 kmer.fa`
 
-Step 2: Align the kmer FASTA (from step 1) to reference genome using blasr.
+Step 2: Align the kmer FASTA (from step 1) to reference genome using blasr sawriter and in the conda `blasr` environment.
 
+`Create the reference.fa.sa file: sawriter reference.fasta.sa reference.fasta`
 `Example: blasr kmer.fa reference.fa --sa reference.fa.sa --out kmer.aln -m 5 --noSplitSubreads --minMatch 15 --maxMatch 20 --advanceHalf --advanceExactMatches 10 --fastMaxInterval --fastSDP --aggressiveIntervalCut --bestn 10`
 
 Step 3: Generate duplicated window record file.
