@@ -13,7 +13,7 @@ from multiprocessing import Pool
 from sklearn.mixture import BayesianGaussianMixture
 from sklearn.mixture import GaussianMixture
 from sklearn.metrics import silhouette_score
-from sklearn.metrics import calinski_harabaz_score
+from sklearn.metrics import calinski_harabasz_score
 
 
 
@@ -51,7 +51,7 @@ def genotype(cnvays):
         finalline = [gtlabes.get(x, 'M') for x in newlabels]
         if len(np.unique(finalline)) > 1:
             sc = silhouette_score(cnv, finalline, metric='euclidean') # silhouette_score
-            chs = calinski_harabaz_score(cnv, labels) # calinski_harabaz_score
+            chs = calinski_harabasz_score(cnv, labels) # calinski_harabasz_score
         else:
             sc = np.nan
             chs = np.nan
@@ -118,9 +118,9 @@ def produce_vcf(df, cnvays, samples, outname):
             fgts = '\t'.join(fgts)
             alt = ','.join(alt) if alt else '.'
             silhouette_score = row[-12]
-            calinski_harabaz_score = row[-11]
+            calinski_harabasz_score = row[-11]
             log_likelihood = row[-10]
-            f.write(f'{chrom}\t{start}\t{f"{chrom}:{start}-{end}"}\tA\t{alt}\t.\t.\tEND={end};SVTYPE={svtype};SILHOUETTESCORE={silhouette_score};CALINSKIHARABAZESCORE={calinski_harabaz_score};LOGLIKELIHOOD={log_likelihood}\tGT:CP\t{fgts}\n')
+            f.write(f'{chrom}\t{start}\t{f"{chrom}:{start}-{end}"}\tA\t{alt}\t.\t.\tEND={end};SVTYPE={svtype};SILHOUETTESCORE={silhouette_score};CALINSKIHARABAZESCORE={calinski_harabasz_score};LOGLIKELIHOOD={log_likelihood}\tGT:CP\t{fgts}\n')
 
 def produce_mergevcf(df, cnvays, samples, outname):
     gt2alt = {'d': 'CN0',
@@ -170,9 +170,9 @@ def produce_mergevcf(df, cnvays, samples, outname):
             fgts = '\t'.join(fgts)
             alt = ','.join(alt) if alt else '.'
             silhouette_score = row[-12]
-            calinski_harabaz_score = row[-11]
+            calinski_harabasz_score = row[-11]
             log_likelihood = row[-10]
-            f.write(f'{chrom}\t{start}\t{f"{chrom}:{start}-{end}"}\tA\t{alt}\t.\t.\tEND={end};SVTYPE={svtype};SILHOUETTESCORE={silhouette_score};CALINSKIHARABAZESCORE={calinski_harabaz_score};LOGLIKELIHOOD={log_likelihood}\tGT:CP\t{fgts}\n')
+            f.write(f'{chrom}\t{start}\t{f"{chrom}:{start}-{end}"}\tA\t{alt}\t.\t.\tEND={end};SVTYPE={svtype};SILHOUETTESCORE={silhouette_score};CALINSKIHARABAZESCORE={calinski_harabasz_score};LOGLIKELIHOOD={log_likelihood}\tGT:CP\t{fgts}\n')
 
 @click.command()
 @click.option('--cnvfile', help='input cnvr file which generated from CNV.Discovery.sh')
@@ -185,7 +185,7 @@ def main(cnvfile, outprefix, merge, nproc):
     """
     start = time.time()
     info_df, cnvays, samples, avg_ay, sd_ay = loadcnvrfile(cnvfile)
-    sample_header = samples + ['silhouette_score', 'calinski_harabaz_score', 'Log_likelihood']
+    sample_header = samples + ['silhouette_score', 'calinski_harabasz_score', 'Log_likelihood']
     if nproc > 1:
         pool = Pool(processes=nproc)
         gtdf = pd.DataFrame(np.vstack(pool.map(genotype, np.array_split(cnvays, nproc))))
