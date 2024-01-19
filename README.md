@@ -140,9 +140,11 @@ $ python 0.1.Kmer_Generate.py [OPTIONS] FAFILE WINSIZE OUTFILE
 Step 2: Align the kmer FASTA (from step 1) to reference genome using blasr sawriter and in the conda `blasr` environment.
 
 Create the reference.fa.sa file: 
+
 `Example: sawriter reference.fasta.sa reference.fasta`
 
 Align the kmer FASTA to reference genome: 
+
 `Example: blasr kmer.fa reference.fa --sa reference.fa.sa --out kmer.aln -m 5 --noSplitSubreads --minMatch 15 --maxMatch 20 --advanceHalf --advanceExactMatches 10 --fastMaxInterval --fastSDP --aggressiveIntervalCut --bestn 10`
 
 Step 3: Generate duplicated window record file.
